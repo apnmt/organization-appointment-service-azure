@@ -17,7 +17,7 @@ import org.springframework.core.env.Environment;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"de.apnmt.common", "de.apnmt.aws.common", "de.apnmt.organizationappointment.common", "de.apnmt.organizationappointment"})
 @EnableConfigurationProperties({ ApplicationProperties.class })
 public class OrganizationappointmentserviceApp {
 
