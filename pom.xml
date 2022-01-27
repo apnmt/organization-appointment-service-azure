@@ -98,8 +98,8 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>de.apnmt.aws.common</groupId>
-            <artifactId>apnmt-aws-common</artifactId>
+            <groupId>de.apnmt.azure.common</groupId>
+            <artifactId>apnmt-azure-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
