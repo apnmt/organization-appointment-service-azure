@@ -1,24 +1,21 @@
 package de.apnmt.organizationappointment.web.rest.errors;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import de.apnmt.common.errors.ErrorConstants;
+import de.apnmt.common.errors.ExceptionTranslator;
 import de.apnmt.organizationappointment.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests {@link ExceptionTranslator} controller advice.
  */
-@WithMockUser
 @AutoConfigureMockMvc
 @IntegrationTest
 class ExceptionTranslatorIT {
@@ -66,30 +63,9 @@ class ExceptionTranslatorIT {
     }
 
     @Test
-    void testAccessDenied() throws Exception {
-        mockMvc
-            .perform(get("/api/exception-translator-test/access-denied"))
-            .andExpect(status().isForbidden())
-            .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
-            .andExpect(jsonPath("$.message").value("error.http.403"))
-            .andExpect(jsonPath("$.detail").value("test access denied!"));
-    }
-
-    @Test
-    void testUnauthorized() throws Exception {
-        mockMvc
-            .perform(get("/api/exception-translator-test/unauthorized"))
-            .andExpect(status().isUnauthorized())
-            .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
-            .andExpect(jsonPath("$.message").value("error.http.401"))
-            .andExpect(jsonPath("$.path").value("/api/exception-translator-test/unauthorized"))
-            .andExpect(jsonPath("$.detail").value("test authentication failed!"));
-    }
-
-    @Test
     void testMethodNotSupported() throws Exception {
         mockMvc
-            .perform(post("/api/exception-translator-test/access-denied"))
+            .perform(post("/api/exception-translator-test/missing-servlet-request-parameter"))
             .andExpect(status().isMethodNotAllowed())
             .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
             .andExpect(jsonPath("$.message").value("error.http.405"))
