@@ -123,6 +123,11 @@ spring:
   output:
     ansi:
       console-available: true
+  jms:
+    servicebus:
+      connection-string: changeit
+      pricing-tier: changeit
+      topic-client-id: changeit
 
 server:
   servlet:
