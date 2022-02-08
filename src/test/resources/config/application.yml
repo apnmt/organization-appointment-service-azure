@@ -51,6 +51,11 @@ spring:
         size: 1
   thymeleaf:
     mode: HTML
+  jms:
+    servicebus:
+      connection-string: Endpoint=sb://xxxxxxxxx.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      pricing-tier: standard
+      topic-client-id: xxxxxxxxxxxxxxxxxxxx
 
 server:
   port: 10344
