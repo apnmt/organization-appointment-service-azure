@@ -48,9 +48,9 @@ jobs:
       - name: Package application
         run: ./mvnw package -Pprod -DskipTests
       - name: Download ApplicationInsights Agent
-          run: |
-            cd target
-            curl -L https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.6/applicationinsights-agent-3.2.6.jar --output applicationinsights-agent.jar
+        run: |
+          cd target
+          curl -L https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.6/applicationinsights-agent-3.2.6.jar --output applicationinsights-agent.jar
       - name: Zip JARs
         run: |
           cd target
