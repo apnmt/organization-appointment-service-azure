@@ -47,9 +47,18 @@ jobs:
           ./mvnw verify
       - name: Package application
         run: ./mvnw package -Pprod -DskipTests
+      - name: Download ApplicationInsights Agent
+          run: |
+            cd target
+            curl -L https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.6/applicationinsights-agent-3.2.6.jar --output applicationinsights-agent.jar
+      - name: Zip JARs
+        run: |
+          cd target
+          mv organizationappointmentservice-${RELEASE_VERSION}.jar organizationappointmentservice.jar
+          zip organizationappointmentservice.zip organizationappointmentservice.jar applicationinsights-agent.jar
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
-            az storage blob upload --account-name apnmt --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --container-name apnmt-applications --file target/organizationappointmentservice-${RELEASE_VERSION}.jar --name organizationappointmentservice.jar
+            az storage blob upload --account-name apnmt --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --container-name apnmt-applications --file target/organizationappointmentservice.zip --name organizationappointmentservice.zip
